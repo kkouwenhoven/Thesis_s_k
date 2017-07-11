@@ -1,0 +1,38 @@
+\chapter{Discussion}
+
+As briefly discussed in chapter~\ref{chap:results} the accuracy of the results is low.
+Since, at the time of writing, the prototype is not yet fully integrated measurements had to be done using an oscilloscope.
+Using the oscilloscope in this set-up the resolution of the TDOA and delay measurements is \SI{0.1}{\milli\second}.
+This corresponds to a distance resolution of \SI{3.4}{\centi\meter}.
+In the final prototype these measurements will be done using a timer with a oscillator frequency of \SI{40}{\kilo\hertz} resulting in a resolution of \SI{25}{\micro\second}.
+This resolution in time measurement gives a distance resolution of \SI{8}{\milli\meter}.
+
+By comparing these resolutions it's clear that, using the current results described in chapter~\ref{chap:results}, nothing can be said about the accuracy of the final fully integrated system.
+The results do show that even with the lower measurement resolution of the oscilloscope, the required measurement resolution of \SI{10}{\centi\meter} from requirement~\ref{req:locres} is reached. 
+
+If we compare the resolution of \SI{8}{\milli\meter} to the error created by the uncertainty of the delay, \SI{17}{\centi\meter}, it's is clear that the final accuracy will be mainly determined by the uncertainty in the delay.
+As discussed in chapter~\ref{chap:results} this error has a maximum of \SI{17}{\centi\meter}.
+This error is larger than the accuracy requirement \ref{req:locper} of \SI{10}{\centi\meter}.
+This means that, without a filtering method the accuracy requirement is not met.
+
+If we are able to characterize the distribution of the uncertainty in the delay the particle filter implemented on the MCU will be able to increase the accuracy.
+How this particle filter works is discussed in~\cite{processing}.
+
+In conclusion the results given in chapter~\ref{chap:results} do not give enough information to determine the final accuracy of the prototype system.
+We can however make conclusions on which factors will have the largest influence on the accuracy.
+The results do give enough data to conclude that the final system will be able to perform distance measurements with an accuracy close to the required performance.
+
+The biggest limitation at this point in the project is the missing integration with the microcontroller.
+If the microcontroller was integrated it would be possible to do a large set of measurement with a high resolution making it possible to draw conclusions on the accuracy of the system.
+With the microcontroller integrated it is also possible to measure if the integration introduces an error.
+As we've already seen the communication system had an unexpected large delay.
+It could be possible that the integration with the microcontroller causes other delays.
+At this point in time it is thus not possible to find all the delays in the complete system.
+
+With the microcontroller present it is also possible to do better measurements on the communication channel delay.
+It is important to characterize the distribution of the delay present in the communication channel to determine the average error introduced by the delay.
+Currently only the max error is known (measured with a low resolution) but the average error can not yet be calculated.
+
+If we want to fully test the prototype and draw meaningful conclusion about the accuracy of the prototype the full integration must be completed.
+This full integration will be done in the final 2 weeks of the project which unfortunately means that they cannot be included in this thesis.
+The steps required to complete this integration will be discussed in chapter~\ref{chap:recom}.

@@ -1,0 +1,68 @@
+\chapter{Recommendations}
+\label{chap:recom}
+Two types of recommendations are given:
+
+The first type focusses on tasks necessary to integrate the full system and perform measurements.
+These tasks are planned for the next two weeks and need to be completed before the module can be delivered to the Zebro team.
+These recommendation are thus given as a list of tasks.
+
+The second type of recommendations focusses on the future of the project.
+How will the module fit into the Zebro project and how might the module change in the future of the Zebro project?
+Possible improvements for the system will be discussed and topics which require more research are given.
+
+\section{Tasks planned}
+
+\begin{reqs}{R}
+  \item
+  Focus on integration of distance sensing systems with communication and processing system.
+    \begin{subreqs}
+      \item
+      Connect distance sensing system to the microcontroller as described in section~\ref{sec:sys_int}.
+      \item
+      Implement counter measure for the delay in the communication channel as described in section~\ref{sec:delay}.
+      \item
+      Test if the microcontroller can calculate the TDOA of the ultrasonic pulse and the RF message.
+    \end{subreqs}
+  \item
+  Focus on acquiring measurement results for full system.
+    \begin{subreqs}
+      \item
+      Make testbench software which performs a large set of measurement for a single distance and stores the acquired results.
+      \item
+      Run tests for multiple distances.
+      \item
+      Analyse test results to determine accuracy and stability of fully integrated system.
+    \end{subreqs}
+  \item
+  Focus on characterizing the distribution of the delay in the communication channel.
+  \item
+  Integrate module with Zebro power management system.
+\end{reqs}
+
+\section{Recommendations for the future of the module in the Zebro project}
+
+With the tasks described above completed the module is ready to be implemented on the Zebro.
+To check if the module works together small test have to be performed.
+The most important of these test is to check if the module works on a waking Zebro.
+It is possible that the movement of the leg influences the module performance.
+If this is the case countermeasures can be taken.
+The system can be calibrated or mechanically decoupled from the Zebro by using rubber dampeners in the mechanical connection.
+
+It's possible that the reflector cone will become unstable when the Zebros moves at high speed or trough rough terrain.
+If this happens it's possible to improve the stability by using 3 riser legs instead of 2.
+During testing the effect of these risers on the transmitting and receiving behaviour was found to be negligible so using three risers will not affect the performance of the system.
+
+More research could be done to improve the reflector antenna.
+During the conceptual design the effect of material or the not completely smooth surface of the 3D print was not discussed.
+It might be possible that a smooth metal reflector improves the transmitting and receiving behaviour antenna.
+
+\subsection*{Zebro to the moon}
+
+There are rumours of a Zebro going to the moon.
+Our module does not work in the environment since we need the propagation of sound to do measurements.
+If the Lunar Zebro requires a localization module we advise that research into an alternative to this module is performed as soon as possible.
+During our state of the art research and conceptual design we found that most alternatives to the ultrasound system give poor performance.
+RSSI for example has no direction relation to the distance between modules and is very dependent on device orientation.
+Swarm networks further decrease the use of RSSI since the message are hopped in the network making it hard to find the RSSI value corresponding to a certain Zebro.
+We believe that finding a working alternative to the system described in this paper requires time so we advice the Zebro team to look into alternative for the Lunar Zebro as soon as possible.
+We estimate that the accuracy of these alternatives will be lower which has to be taken into account by the Zebro swarm behaviour group.

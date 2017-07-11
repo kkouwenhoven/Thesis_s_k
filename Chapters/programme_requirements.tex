@@ -1,0 +1,92 @@
+\chapter{Programme of requirements}
+\label{chap:por}
+
+The current Zebro project has developed a few working Six-legged robots (Zebros).
+These proof-of-concepts have shown that legged robots are possible and have definite advantages, especially on rough terrain.
+However, these robots sometimes exhibit strange and undesired behavior.
+This is currently attributed to the fact that all control algorithms run on a single central processor.
+
+Furthermore, due to the high cost and effort to produce these robots, only a limited number of these robots have been built.
+Moreover, every build robot is slightly different from the others.
+
+The main purpose of the Zebro is swarm-related behaviour, where a swarm of relatively inexpensive, simple and straight-forward robots is able to perform tasks that are not suited for one bigger robot.
+An example would be the mapping of a disaster area.
+
+Numerous simulations of swarms are available, but realistic swarm behaviour needs to be studied using a realistically sized swarm.
+Therefore, a larger number of Zebros is needed. Thus, it is highly desirable to redesign the main components for simplicity, producibility, repairability, stability, and cost.
+
+The Zebro Team is currently working on a modularized Deci Zebro, the size of an A4 sheet of paper.
+The Deci’s will form a swarm of a 100 robots by the end of June.
+
+Currently the Deci’s have no means of determining the distance between themselves.
+This capability allows the Deci to become a real swarming robot.
+Besides giving information to the central ‘brain’ of the Deci, the module itself should also indicate to a human what the module ‘sees’ and which direction it wants to go.
+
+\textbf{The goal of the bachelor project is the development of a new Localisation module for Zebro as well as a communication system for this module.}
+
+The Localisation module will be a part of Zebro itself, and determine the Zebro’s position in the swarm and relative to e.g. the charging station.
+
+\section{Functional Requirements}
+\begin{reqs}{F}
+  \item\label{req:neighbours} The module should be able to locate multiple neighbouring Zebros (KPI)
+    \begin{subreqs}
+      \item\label{req:allunits} The module should be able to be used on and locate charging stations and similar units (KPI)
+      \item\label{req:distinguish} The module should be able to distinguish different users (Zebro, charging station, other member of Zebro familie) of the module (KPI)
+    \end{subreqs}
+
+  \item The module should be able to receive and transmit packets to neighbouring Zebros
+    \begin{subreqs}
+      \item The module should be able to make contact with at least 3 neighbouring Zebros
+      \item The module should be able to broadcast housekeeping data for inspection by users
+    \end{subreqs}
+\end{reqs}
+
+
+\section{System Requirements}
+\begin{reqs}{S}
+  \item\label{req:specs} The mechanical, power, and digital connections must conform to the specifications outlined in~\cite{DeciSpecs}
+
+  \item The module must conform to the Zebrobus protocol outlined in~\cite{Zebrobus}
+
+  \item The module must respect the modularity of Zebro modules
+    \begin{subreqs}
+    \item The module should be a slave to the Zebro bus and cannot make requests itself
+      \item\label{req:inhibition} Use of the module cannot inhibit the functionality of other modules on the Zebro
+      \item With the exception of data broadcast on the Zebro bus, the module should collect data exclusively using its own sensors
+      \item The module should communicate its data to the Zebro by responding to requests over the Zebro bus
+      \item The modules should be interchangeable between robots and easily replaceable
+    \end{subreqs}
+
+  \item The module should be able to be used in indoor environments
+
+  \item The communications network should be homogeneous
+    \begin{subreqs}
+      \item Communications cannot rely on a predetermined master node or network hub
+      \item An individual Zebro within range should be able to join the communications network at any time
+      \item Any individual Zebro in the network should be able to leave without affecting network functionality
+    \end{subreqs}
+
+  \item\label{req:stationary} The module should be usable on stationary elements, such as a charging station, without any changes to the hardware
+
+  \item The module connects to the Zebro power system (see~\ref{req:specs})
+    \begin{subreqs}
+      \item\label{req:volt}The power system is rated at \SIrange{13}{19}{\volt}
+      \footnote{There are no specifications yet for the maximum drawn power/current}
+    \end{subreqs}
+
+  \item\label{req:debug} The module should be able to provide debugging information over the Zebro bus
+\end{reqs}
+
+\section{Performance Requirements}
+\begin{reqs}{P}
+  \item\label{req:locper} The module should be able to locate other Zebros with an accuracy of at least \SI{10}{\centi\meter}
+  \item\label{req:locrange} The module should be able to locate Zebros within a range of at least \SI{5}{\meter}
+  \item\label{req:locres} The distance data provided to the Zebro brain should have a resolution of \SI{10}{\centi\meter}
+  \item\label{req:omnidir} The module should be able to locate Zebros in all directions of the horizontal plane (\SI{360}{\degree} coverage)
+\end{reqs}
+
+\section{Development Constraints}
+\begin{reqs}{D}
+  \item The module production cost shall not exceed \euro $150$ per unit
+  \item The module PCB should support pick-and-place service
+\end{reqs}

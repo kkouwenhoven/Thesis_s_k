@@ -1,0 +1,164 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+11pt, % Sjors Was Here The default document font size, options: 10pt, 11pt, 12pt
+%oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+english, % ngerman for German
+singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
+%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
+% liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+%toctotoc, % Uncomment to add the main table of contents to the table of contents
+%parskip, % Uncomment to add space between paragraphs
+%nohyperref, % Uncomment to not load the hyperref package
+headsepline, % Uncomment to get a line under the header
+%chapterinoneline, % Uncomment to place the chapter title next to the number on one line
+%consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
+]{MastersDoctoralThesis} % The class file specifying the document structure
+
+\title{Development of an Omni-directional distance sensing module for the Deci Zebro}
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{mathtools}
+\usepackage{times} % Use times format
+\usepackage{abstract}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+\usepackage[official]{eurosym}
+\usepackage[style=ieee]{biblatex}
+	\addbibresource{lit.bib}
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\usepackage{enumitem} %For the table of req.
+\setlist[enumerate]{label*=\arabic*.}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{pdfpages}
+\usepackage{eurosym}
+
+
+
+\newenvironment{reqs}[1]{
+  \def
+	\reqletter{#1}
+  \begin{enumerate}
+      [label={\bfseries [\reqletter-\arabic{enumi}]},
+       beginpenalty=0, midpenalty=50, endpenalty=0]
+			 }
+{\end{enumerate}}
+
+\newenvironment{subreqs}{
+  \begin{enumerate}
+      [label={\bfseries [\reqletter-\arabic{enumi}.\arabic{enumii}]},
+       beginpenalty=100, midpenalty=100, endpenalty=0]
+}
+{\end{enumerate}}
+
+%----------------------------------------------------------------------------------------
+%	MARGIN SETTINGS
+%----------------------------------------------------------------------------------------
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=3.3cm, % Inner margin
+	outer=3cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+
+\begin{document}
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+
+ \begin{titlepage}
+
+	\vspace{1cm}
+	{\scshape\Large Electrical Engineering Bsc. Thesis\par}
+	\vspace{1cm}
+	{\huge\bfseries Development of an Omni-directional\par distance sensing system for the\par Deci Zebro\par}
+	\vspace{1.5cm}
+	K. Kouwenhoven (4222849) \par S. G. Verkamman (4294815)\par
+	\vspace{1.5cm}
+  \includegraphics[width=\textwidth]{Figures/zebro_black_white.PNG}\par
+	\vfill
+	% Bottom of the page
+	{\Large Supervisors:\par}
+	Chris Verhoeven (EWI, TuDelft)\par
+	Edwin Hakkennes (EWI, TuDelft)\par
+	Ronald Bos (EWI, TuDelft)\par
+	Daniël Booms (The Zebro project, TuDelft)\par
+	\vspace{1cm}
+	{\scshape\large Technische Universiteit Delft\par}
+	{\large June 2017}
+ \end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{abstract}
+\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+In this thesis, we will describe the design process of a distance sensing system for the Deci Zebro swarm robots.
+We use a technique that transmits a radio frequency message and a ultrasonic pulse concurrently.
+Due to the difference in propagation speed of both signals, the distance could be measured using time difference of arrival (TDOA).
+A cone shaped antenna is designed to create a \SI{360}{\degree} ultrasonic pulse coverage.
+The prototype has a range of at least \SI{5}{\meter}, a resolution of \SI{8}{\milli\meter} and an accuracy of $\pm$ \SI{17}{\centi\meter}.
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\tableofcontents % Prints the main table of contents
+
+%\listoffigures % Prints the list of figures
+
+%\listoftables % Prints the list of tables
+
+%----------------------------------------------------------------------------------------
+%	CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter% Begin numeric (1,2,3...) page numbering
+
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
+
+\include{Chapters/introduction}
+\include{Chapters/programme_requirements}
+\include{Chapters/conceptual_design}
+\include{Chapters/proof_concept}
+\include{Chapters/prototype}
+\include{Chapters/results}
+\include{Chapters/discussion}
+\include{Chapters/conclusion}
+\include{Chapters/recommendations}
+
+%----------------------------------------------------------------------------------------
+%	APPENDICES
+%----------------------------------------------------------------------------------------
+
+\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+%\include{Appendices/AppendixA}
+\include{Appendices/Appendixcircuits}
+\include{Appendices/AppendixBOM}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+\printbibliography[heading=bibintoc,title={Bibliography}]{}
+%----------------------------------------------------------------------------------------
+
+\end{document}

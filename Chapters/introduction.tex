@@ -1,0 +1,125 @@
+\chapter{Introduction}
+
+The ZEBRO project is a swarm robotics research group at the TU Delft.
+Its mission is:
+\\\\
+\emph{To develop self-deploying, inexpensive, extremely miniaturized and autonomous roving robots which cooperate in swarms capable of functioning in a wide spectrum of topologies and environments that can quickly provide information with the help of distributed sensor systems and supports payloads suitable for a wide range of missions.}
+\\\\
+It started in September 2013, and has now been absorbed by the TU Delft Robotics Institute as part of their research endeavours into swarm robotics.
+
+The idea of swarm robotics is inspired by nature, in particular by small insects or birds who exhibit so-called swarm behaviour.
+As a group, a swarm can accomplish complex tasks, despite the fact they are not considered `smart' individually.
+By all following the same simple set of rules, the swarm as a whole can exhibit emergent behaviour, behaviour that is not explicitly programmed into any one of its members.
+For example, flocking is not the behaviour of a single bird but the emergent behaviour of the entire flock.
+
+This idea that a group of simple individuals can deal with more complex tasks is the cornerstone of swarm robotics.
+Furthermore, an entire swarm is very resilient, as every individual member is expendable.
+This means that swarm robotics has some unique applications, such as a disaster area that is inaccessible to humans or large robots, due to a hazardous or arduous environment.
+
+Currently, the ZEBRO project is working to redesign the robots to (further) improve producibility, reparability, stability, and lower unit cost.
+Being able to produce useful ZEBRO units on a large scale will provide fertile ground for swarm robotics research efforts.
+There are several different versions of the ZEBRO, each with a different form factor and design goal.
+Our research focuses on the Deci ZEBRO, which is the size of an A4 sheet of paper and is designed to be extremely modular.
+
+Our group's goal is the design of a communication and localization module for the Deci Zebro.
+The module has two purposes.
+The first is to provide a Zebro robot with the positions of robots in its vicinity.
+The second is to facilitate wireless communication within the Zebro swarm.
+
+We have decided on using range measurements for localization.
+This has lead to the following subdivision of our module:
+\begin{itemize}
+  \item
+    The \textbf{distance sensing} system measures the distance between Zebro robots.
+  \item
+    The \textbf{communication} system sets up a decentralized mesh network for communication.
+  \item
+    The \textbf{processing} system takes the measurements provided by the other submodules and uses them to construct a local (i.e.\ in the Zebro's neighbourhood) model of the swarm.
+\end{itemize}
+
+This Thesis focusses on the design of the distance sensing submodule for the Deci Zebro.
+
+\section{Problem definition}
+
+We need to design a system that can measure the distance between robots operating in a swarm.
+The system should provide the Zebro `brain` a distance and an angle with a certain accuracy.
+This distance has to be matched to a Zebro serial number such that the `brain` knows to which Zebro the range and angle relates.
+For this thesis we will elaborate the range determining subsystem that should provide a distance with a certain accuracy to the central processor of the localisation and communication module.
+The central processes will perform the processing action and presents the data, in the correct format, to the Zebro `brain`.
+
+\section{State of the art}
+
+For the distance sensing functionality of the Zebro we are looking into a technique that uses off the shelf devices, such as Bluetooth modules, and is capable of giving accurate distance measurements on a moving robot.
+As a start we found two documents \cite{Ekberg2009,Kuriakose2014} explaining the general concept of localisation and the usable techniques.
+Using these documents we set out to research on the topics of Received signal strength indicator (RSSI), Time of flight and time difference of arival (TDOA) as distance sensing techniques and finding the possible implementations of them.
+The results are given in the following subsections:
+
+\subsection*{Bluetooth}
+
+Bluetooth devices have two usable standard parameters: Received signal strength indicator (RSSI) and link quality. Both could be used to determine the distance between devices since, in theory, both parameters linearly depend on the distance between devices. Literature shows that using know formulas, the distance between devices can be estimated form the RSSI. Literature \cite{Forno2005} shows two problems with using RSSI as a distance sensing technique: the RSSI is not stable since the Bluetooth protocol takes measures to ensure the highest quality link and the RSSI is dependent on device orientation. Papers \cite{Scheerens2012,Dahlgren2014} gives values for the orientation dependency: in worst case the result for a measurement done at 1 meter distance gives a RSSI values which corresponds to 10 meter. Using RSSI for distance sensing might be possible in static environments with fixed device orientation but is not adequate in a system with moving devices.
+
+Another possibility for using Bluetooth in distance sensing is measuring the time-of-flight of transmitted messages. We can either measure the time difference between sending a message and when it arrives at the other device or we can measure the round trip time when a message is transmitted back and forth between two devices. For the first method both devices would need high accuracy synchronised clocks \cite{Ekberg2009} and the second methods is highly dependent on both the message processing time and the accuracy of the internal clock. Furthermore the technique is difficult the implement in a system where messages are hopped between robots making it hard to determine which path the message has travelled.
+
+\subsection*{Radio Frequency}
+
+In Journal of Field Robotics \cite{Min2016} it is shown that it is possible to determine the angle of arrival (AOA) using rotating directional antenna's, antenna arrays or beam forming antenna. This (AOA) could be used to map devices and estimate the distance between these mapped devices based on received signal power. The problem is that these systems are big, expensive and complex making them unfavourable for use on a Zebro and within the time frame of the BAP.
+
+\subsection*{Acoustic}
+
+The literature \cite{Peng2007} uses acoustic signals to determine time-of-arrival (TOA). Two-way sensing is used to determine the distance without the need for synchronised clocks. The result is a low cost, high accuracy device which operates in the audible sound spectrum. The range for indoor applications is roughly 5 meters due to reflection/multipath.
+
+\subsection*{Infra red}
+
+The paper about the Multirobot Positioning Systems \cite{Pugh2009} describes a system of miniature robots which use IR to determine the distance between robots. The range of this system is around 3 meters.
+
+\subsection*{Ultrasonic}
+In literatures \cite{Priyantha2000,Priyantha2005,Balakrishnan2003,Smith2005} they describe the work done on a system, called Cricket, that uses ultrasound in combination with the RF communication channel to determine distance between two devices.
+The system measures the time difference of arrival (TDOA) of a RF transmitted ID tag and an ultrasonic pulse.
+This time difference is related to the distance and gives results with an accuracy of 1 cm with proper filtering techniques. This system uses beacons with a fixed position to determine the relative distance of moving devices.
+The range of the system is roughly 10 meters.
+
+The Cricket team has used two methods to detect if the system receives an ultrasonic pulse. The first is a phase locked loop (PLL) as discussed in \cite{Hsieh1996}.
+The PLL tracks the incoming signal and produces as synchronised output signal.
+This output signal has the same phase, and thus frequency, as the incoming signal.
+Since the frequency of the ultrasound pulse is known a tone detector can be used to detect the frequency of the synchronised output signal.
+If the frequency of the synchronised signal is the same as the frequency of the transmitted ultrasonic pulse the system is receiving an ultrasound pulse.
+
+The second method is to use a peak detection circuit to detect the amplitude of the incoming signal as describe in \cite{Bhagat2015}.
+The peak detection circuit charges and discharges a capacitor creating a voltage level corresponding to a certain amplitude.
+This voltage level can than be detect by, for example, an comparator.
+
+\subsection*{Conclusion}
+
+At this point in the literature study we see the most potential in a system using ultrasound and the communication channel. Both the accuracy and the range are high. Other researched systems fall short on one of these fronts: Bluetooth systems have a high range but the accuracy for moving devices is poor, acoustic and IR systems have a high accuracy but the range is insufficient for the Zebro swarm.
+
+The biggest challenge of a ultrasonic system is the directional nature of ultrasonic transmitters and receivers. In the Zebro swarm we need a distance sensing system with a 360 degree field. Using ultrasonic reflector antenna \cite{Claycomb1992} we hope to create a omnidirectional ultrasonic transducer which allows us to create a mobile version of the cricket system \cite{Priyantha2000,Priyantha2005,Balakrishnan2003,Smith2005} usable for the Zebro swarm.
+
+
+\section{Thesis synopsis}
+
+The main body of the thesis, which focusses on the design phase, is divided in three main parts:
+
+\begin{itemize}
+  \item
+  \textbf{The conceptual design} in this part the used concept will be described.
+  This concept will then be further refined into subparts.
+  For each subpart design consideration will be discussed and decision will be made.
+  At the end of this part it should be clear how the system will be working and what is necessary for it to work properly.
+  \item
+  \textbf{Proof of concept} in this part small tests are done to show that the concept will work the way it is intended to.
+  Focus is put on showing that the different parts for the concept work when using simple hardware.
+  At the end of this chapter enough information on the working of the concept is gathered to start the design of the prototype.
+  \item
+  \textbf{Prototype} in this part an overview of the final prototype is given.
+  Focus is put on the integration of the different systems inside this prototype.
+  \end{itemize}
+
+Before the main body the Key performance indicators and requirements are discussed in the programme of requirements.
+They are given in an structured list so they can be referenced during the design and testing of the system.
+
+After the design phase, discussed in the main body as described above, the system is tested.
+How the system is tested is described in the last section of the main body: prototype test plan.
+
+An overview and explanation of the results is given in a separate chapter.
+The results are discussed and base on the results and discussion a conclusion is drawn.
+Last a recommendation for the future is given.

@@ -1,0 +1,65 @@
+\chapter{Conclusion}
+\label{chap:conc}
+The first decision to be made was to, based on the state of the art research, decide on a concept.
+The chosen concept is based on the Cricket project, a research project from MIT \cite{Priyantha2000,Priyantha2005,Balakrishnan2003,Smith2005}, and uses the following technique:
+to measure the distance between Zebros a RF message and a ultrasonic pulse are transmitted concurrently, the distance between Zebros can than be calculated from the TDOA.
+With this technique we reach the key performance indicators (KPI) as given in the programme of requirements:
+
+\begin{itemize}
+  \item
+    \ref{req:neighbours} \textbf{The module should be able to locate multiple neighbouring Zebros (KPI).}
+    As described in chapter~\ref{chap:concept} both the ultrasonic pulse and RF pulse reach all Zebros within the range of the ultrasonic pulse.
+    The range of the ultrasonic pulse is larger than the required distance sensing range of \SI{5}{\meter} \ref{req:locrange}.
+    This means that all Zebros within the required distance sensing range receive the necessary information to perform a distance measurement.
+    As long as all Zebros get a turn to transmit their ultrasonic pulse and RF message all Zebros in the swarm can be located.
+  \item
+    \ref{req:allunits} \textbf{The module should be able to be used on and locate charging stations and similar units (KPI).}
+    The chosen technique does not require modules to be moving in order to perform measurements.
+    The module can thus be implemented on static objects such as a charging station.
+  \item
+    \ref{req:distinguish} \textbf{The module should be able to distinguish different users (Zebro, charging station, other member of Zebro familie) of the module (KPI)}
+    The RF message, which is transmitted concurrently with the ultrasonic pulse, contains the Zebro serial number of the transmitting module.
+    Using this serial number other Zebros know who is transmitting: it's tells them what the transmitter is (a Zebro, a charging station etc.) and who the transmitter is (Zebro 50 or Zebro 74).
+    Thus the module can distinguish between different users.
+\end{itemize}
+
+After the conceptual design stage, we made some proof of concept circuits and 3D printed the antenna for the ultrasonic transceiver.
+During tests we encountered some problems with the receiving circuit: the circuit had noise oscillations which were amplified and resulted in undesired outputs.
+The problem was solved with the use of op-amp with a higher bandwidth.
+Other problems occurred at the peak detection circuit, the capacitor discharged to fast resulting in undesired outputs of the comparator stages.
+This problem was solved by changing the values of the components in the peak detection circuit.
+With all circuit problems solved we were able to proof the correct working of the transmitter and receiver concepts.
+The task after the proof of concept was to combine these transmitter and receiver circuit to a working prototype.
+
+To make the working prototype, the module needed to switch between transmitting and receiving mode to protect the receiver part form the 30 $V_{p-p}$ of the transmitter.
+Several options were available, but we decided to use an analogue switch, also called a bilateral switch, for this problem.
+With all components known and proofed on, a naked prototype PCB was designed.
+This prototype, made with a PCB milling machine, was used for integration and testing with the communication module.
+A problem we encountered was that the module we used for sending and receiving the RF signal has a delay between transmission and receiving of a package.
+We need to take this delay into account for determining the distance.
+
+During the testing phase we found the results, with the delay taken into account, correspond to the actual distance between modules.
+Since we use the average value of the delay we get an error corresponding to the deviation in the delay.
+Using the delay gives a max. error of $\pm$ \SI{17}{\centi\meter}.
+This means we do not comply to requirement \ref{req:locper} which states that the accuracy has to be at least \SI{10}{\centi\meter}
+
+During these tests the processing method was not yet implemented.
+Using the processing method, a particle filter, we might be able to increase the accuracy of the module.
+As long as the distribution of the delay can be characterized, the particle filter will be able to improve the accuracy of the system.
+Tests with the implemented particle filter will tell if the accuracy of the full system complies to requirement \ref{req:locper}.
+These test will be performed after the deadline of the thesis.
+
+The resolution of the measurements is \SI{8}{\milli\meter} since the TDOA is measured using a timer with a frequency of \SI{40}{\kilo\hertz}.
+Requirement \ref{req:locres} states that the required resolution is \SI{10}{\centi\meter}.
+This requirement is thus easily reached by the designed system.
+
+We thus conclude that there is a high possibility that the fully integrated system will reach the requirements set by the Zebro team.
+Before we can test the performance of the module work need to be done on the final integration of all systems.
+We give a recommendation on the task required to finish the final integration in the next chapter.
+These tasks will be undertaken by our project group in the last two weeks between the thesis deadline and the thesis defence.
+
+\section{Conclusion after integration}
+
+In chapter~\ref{chap:results} the results for the system after integration are given.
+From these results we conclude that the integrated system (still without processing) is capable of performing distance measurements.
+All the conclusions drawn above still hold for the integrated system, the accuracy is still the same.
