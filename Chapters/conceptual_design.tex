@@ -142,7 +142,7 @@ When the transducer does receive an ultrasonic signal the input will be a biased
 The bias of this sinusoidal wave is the DC voltage present when the systems doesn't receive an ultrasonic signal.
 Now the capacitor is charged by the sinusoidal wave and discharges over the resistor.
 The capacitor charges due to this sinusoidal wave, the voltage over the capacitor basically follows the input voltage source. It will charge up to the peak voltage of the signal. Once it reaches this voltage, the capacitor discharges over the resistor.  It does not discharge back through the diode because the diode is a one-way current device. The voltage across the capacitor isn't directly the peak voltage of the waveform. This is because the diode consumes some voltage. Therefore the maximum voltage measured across the output is actually higher than the input voltage by a factor of the voltage drop across the diode. To get the true peak voltage, we must subtract the voltage that the diode consumes from the output signal.
-So if we measure the voltage at the capacitor to be 9V and the diode consumes 0.6V, the peak voltage of the input signal is actually 8.4V. The time it will take for the capacitor to completely discharge is 5RC, where R is the resistance and C is the capacitance. This time needs to be larger than the time of a half period of the 40 kHz signal, which is 0.0125 $ms^{-1}$. So the RC need to be larger than $5 * 0,0125 ms^{-1} = 0.0625$. \footnote{The final values differ from the given RC value. This is due the non ideal behaviour of physical capacitors. The final values as given in the circuit of appendix \ref{Appendixcircuits} are found by testing different configurations on a breadboard.} With this RC the capacitor discharges slowly enough to have a signal so the comparator can detect the difference between a received and not received signal.
+So if we measure the voltage at the capacitor to be 9V and the diode consumes 0.6V, the peak voltage of the input signal is actually 8.4V. The time it will take for the capacitor to completely discharge is 5RC, where R is the resistance and C is the capacitance. This time needs to be larger than the time of a half period of the 40 kHz signal, which is 0.0125 $ms^{-1}$. So the RC need to be larger than $5 * 0,0125 ms^{-1} = 0.0625ms^{-1}$.  With this RC the capacitor discharges slowly enough to have a signal so the comparator can detect the difference between a received and not received signal.\footnote{The final values differ from the given RC value. This is due the non ideal behaviour of physical capacitors. The final values as given in the circuit of appendix \ref{Appendixcircuits} are found by testing different configurations.}
 
 \begin{figure}[H]
 \centering
@@ -213,7 +213,9 @@ To get a 30 $V_{p-p}$ PWM signal, with frequency of 40 kHZ, on the ultrasonic tr
 For the receiver circuit design there were two types of detection circuits discussed before in section \ref{chap:receiver}. But regarding the conclusions of Cricket V1 we chose to use the peak detection circuit in stead of the phase lock loop detector circuit.
 
 The ultrasonic transceiver can receive 40 kHz signals, also known as ultrasonic signal. These received signals have a very low amplitude, this is why the detection circuit needs to have an amplification. The amplification can be done using an operational amplifier. Literature study showed that one stage amplification gives a to low amplification, this is why we use a two stage operational amplification. As can be seen in figure \ref{fig:receivecircuit} the op-amps U2A and U2B are the two stages for the amplification.
-The ultrasonic transceiver is connected to 1Y1 and 1Y2, as can be seen in in the figure \ref{fig:receivecircuit}. The ultrasonic transceiver is biased at a voltage of half the supply voltage of the first two stages, in this design it is $4.5V$, since we power the op-amps with $9V$. This is because the signal received on the ultrasonic transceivers is symmetrical around 0 which holds that is also receives negative voltages, but since we only power the op-amps with a positive voltage and ground we biased the ultrasonic transceiver. In this way we amplify both the positive and negative received amplitudes of the signals. The configuration in which the first two stages are used is called the differential amplifier configuration. In the feedback loops of the op-amps are pot meters visible, this is to tune the amplification of both op-amp stages.
+The ultrasonic transceiver is connected to 1Y1 and 1Y2, as can be seen in in the figure \ref{fig:receivecircuit}. The ultrasonic transceiver is biased at a voltage of half the supply voltage of the first two stages, in this design it is $4.5V$, since we power the op-amps with $9V$. This is because the signal received on the ultrasonic transceivers is symmetrical around 0 which holds that is also receives negative voltages, but since we only power the op-amps with a positive voltage and ground we biased the ultrasonic transceiver. In this way we amplify both the positive and negative received amplitudes of the signals.
+%The configuration in which the first two stages are used is called the differential amplifier configuration.
+In the feedback loops of the op-amps are pot meters visible, this is to tune the amplification of both op-amp stages.\footnote{The final values of the feedback resistors are given in the circuit of appendix \ref{Appendixcircuits}.}
 
 \begin{figure}[H]
 \centering
@@ -258,7 +260,7 @@ F_{c}= \frac{1}{2\pi RC}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth]{Figures/waves_peak_detect.png}
+\includegraphics[width=0.85\textwidth]{Figures/waves_peak_detect.png}
 \caption{Desired output peak detect circuit}
 \label{fig:waves_peak_detect}
 \end{figure}
@@ -369,32 +371,46 @@ The orange signal, the signal after the peak detection circuit
 The pink signal, the $V_{th}$ of the first comparator stage
 \end{itemize}
 
-In figure \ref{fig:sim_receive} you see the operation amplifier signals of the receiver circuit. Between 0 and $0.075*10^{-1}ms^{-1}$ no ultrasonic signal is detected on the transceiver, between $0.075*10^{-1}$ and $0.525*10^{-1}ms^{-1}$ the ultrasonic transceiver receives a ultrasonic signal. And after $0.525*10^{-1}ms^{-1}$ the ultrasonic transceiver receives no ultrasonic pulse any more.
+Figure \ref{fig:sim_receive} shows the operation amplifier signals of the receiver circuit. Between 0 and $0.075*10^{-1}ms^{-1}$ no ultrasonic signal is detected on the transceiver, between $0.075*10^{-1}$ and $0.525*10^{-1}ms^{-1}$ the ultrasonic transceiver receives a ultrasonic signal. And after $0.525*10^{-1}ms^{-1}$ the ultrasonic transceiver receives no ultrasonic pulse any more.
 The signal received on the ultrasonic transceivers have an amplitude between the 0 and $100mV$. This signal is amplified in the first stage of the circuit, this is the green signal in figure \ref{fig:sim_receive}. The second stage amplification results in a signal with a higher amplitude, with a maximum amplitude of $4.5V$ due to the $4.5V$ put on the plus pin of the operational amplifier and the power source of $9V$. This signal is visible in the figure as the red signal.
-The peak detection circuit charges a capacitor in this circuit, and discharges over a resistor. This results in the orange signal. This makes it possible to detect if there is an ultrasonic signal received. If the voltage of the peak detection signal is higher than the $V_{th}$, the pink signal, the comparator switches it's output. And if the peak detection signal becomes lower than the $V_{th}$ the comparator signal switches back. Both dan happen with a bit of delay since the capacitor needs to be charged or discharged. So the desired signal of the peak detection circuit needs to rise and fall fast, but not to fast otherwise the peak detection circuit won't work any more.\\
+The peak detection circuit charges a capacitor in this circuit, and discharges over a resistor. This results in the orange signal. This makes it possible to detect if there is an ultrasonic signal received. If the voltage of the peak detection signal is higher than the $V_{th}$, the pink signal, the comparator switches it's output. And if the peak detection signal becomes lower than the $V_{th}$ the comparator signal switches back. Both happen with a bit of delay since the capacitor needs to be charged or discharged. So the desired signal of the peak detection circuit needs to rise and fall fast, but not too fast otherwise the peak detection circuit won't work any more.\\
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=1.0\textwidth]{Figures/receiver_simulations.PNG}
-  \caption{Operation amplifier signals}
-  \label{fig:sim_receive}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=1.0\textwidth]{Figures/receiver_simulations2.PNG}
-  \caption{Comparator signal}
-  \label{fig:sim_receive2}
-\end{subfigure}
-\caption{Simulation of receiver circuit}
-\label{fig:simulationreceiver}
+\includegraphics[width=0.85\textwidth]{Figures/receiver_simulations.PNG}
+\caption{Simulation of receiver circuit, operational amplifier signals}
+\label{fig:sim_receive}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{Figures/receiver_simulations2.PNG}
+\caption{Simulation of receiver circuit, comparator signal}
+\label{fig:sim_receive2}
+\end{figure}
 
-In figure \ref{fig:sim_receive2} the signals of both comparator stages are visible, together with the peak detection signal and the $V_{th}$ of the first comparator. Again is no ultrasonic signal detected between 0 and $0.05*10^{-1}ms^{-1}$, and a signal detected between $0.05*10^{-1}ms^{-1}$ and $0.5*10^{-1}ms^{-1}$ and after $0.5*10^{-1}ms^{-1}$ no ultrasonic signal is detected any more.
+% \begin{figure}[H]
+% \centering
+% \begin{subfigure}{.5\textwidth}
+%   \centering
+%   \includegraphics[width=1.0\textwidth]{Figures/receiver_simulations.PNG}
+%   \caption{Operation amplifier signals}
+%   \label{fig:sim_receive}
+% \end{subfigure}%
+% \begin{subfigure}{.5\textwidth}
+%   \centering
+%   \includegraphics[width=1.0\textwidth]{Figures/receiver_simulations2.PNG}
+%   \caption{Comparator signal}
+%   \label{fig:sim_receive2}
+% \end{subfigure}
+% \caption{Simulation of receiver circuit}
+% \label{fig:simulationreceiver}
+% \end{figure}
+
+
+Figure \ref{fig:sim_receive2} shows the signals of both comparator stages, together with the peak detection signal and the $V_{th}$ of the first comparator. No ultrasonic signal is detected between 0 and $0.05*10^{-1}ms^{-1}$, and a signal detected between $0.05*10^{-1}ms^{-1}$ and $0.5*10^{-1}ms^{-1}$ and after $0.5*10^{-1}ms^{-1}$ no ultrasonic signal is detected any more.
 The comparators switch when the peak detection signal becomes higher than $V_{th}$ and the other way around. The second comparator has a $V_{th}$ of $2.5V$, so switches together with the signal of the first comparator stage. This switching is between the desired 0 and $5V$ for the micro controller.
 
 
 \section{Conclusion}
-From the simulations done in this chapter we can conclude that the antenna we are going to use for the prototype will have a \SI{50}{\degree} cone, since the reflections of this cone have the best horizontal reflecting characteristics. And together with that have the best transmitting and receiving characteristics.  The transmitting circuit not discussed in this part of the thesis, this because the MIC4428 \cite{MIC4428} IC isn't available in simulation software, so testing in real life is the way we are going to test the transmitting part. The receiver circuit works as we wanted in the simulations so we are going to make this circuit on a prototype solder board and test it in real life.
+From the simulations done in this chapter we can conclude that the antenna we are going to use for the prototype will have a \SI{50}{\degree} cone, since the reflections of this cone have the best horizontal reflecting characteristics. And together with that have the best transmitting and receiving characteristics.  The transmitting circuit not discussed in this part of the thesis, this because the transmitter IC \cite{MIC4428} isn't available in simulation software, so testing in real life is the way we are going to test the transmitting part. The receiver circuit works as we wanted in the simulations so we are going to make this circuit on a prototype solder board and test it in real life.
