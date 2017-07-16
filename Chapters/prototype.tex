@@ -169,27 +169,3 @@ This would slow down the microcontroller and thus the system.
 
 The implementation of this option is not discussed in this thesis since it is undertaken in the last 2 weeks of the bachelor end project after the deadline of the thesis.
 We discuss the problem here since it will be included in the recommendations sections and it will influence the prototype testing phase as discussed in the next section.
-
-\section{Test plan}
-\label{sec:testplan}
-Since the discussed option is not yet implemented for the first prototype tests, complete distance measurements cannot be performed.
-Instead measurements are done by measuring the $US_{detect}$ signal and the communication signal using an oscilloscope.
-
-Before we can test the distance measurements we first need to measure the delay in the communication channel and the deviation of this delay.
-To measure the delay we plot the TX signal of the transmitting module and the RX signal of the receiving module on the oscilloscope.
-From these 2 signals the delay between transmitting and receiving can be determined.
-
-Using 2 modules equipped with the naked proto PCBs we measure the performance for 3 different distances.
-First the modules are placed with a distance of \SI{1}{\meter} between them.
-For the second test this distance is increased to \SI{3}{\meter} and to \SI{5}{\meter} for the final test.
-By plotting the RX signal and the $US_{detect}$ signal of a single module on the oscilloscope the TDOA of the two signals can be determined.
-
-Using the delay measured in the first test and the TDOA of the second test a distance can be calculated.
-Focus is put on the deviation of the result when the measurement is performed multiple times.
-It's less important if the result corresponds to the actual distance since, as long as the measurement deviation is small, the system can be calibrated to give the correct distance.
-Using the deviation measured on the communication delay it is possible to determine if a deviation in the distance result is due to the communication system or the distance sensing system.
-
-For the test the microcontroller is simulated by an Arduino to generate the control and data signal necessary for the test.
-For the distance sensing system (transmitter + receiver) the naked proto PCBs are used.
-The communication system is implemented with an protoboard and the Digimesh modules as discussed in the thesis regarding the communication system \cite{communication}.
-The necessary power is supplied by multiple power supplies.

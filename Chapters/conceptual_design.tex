@@ -141,8 +141,20 @@ In this case the output of the detector circuit will be the input DC voltage.
 When the transducer does receive an ultrasonic signal the input will be a biased sinusoidal wave.
 The bias of this sinusoidal wave is the DC voltage present when the systems doesn't receive an ultrasonic signal.
 Now the capacitor is charged by the sinusoidal wave and discharges over the resistor.
-The capacitor charges due to this sinusoidal wave, the voltage over the capacitor basically follows the input voltage source. It will charge up to the peak voltage of the signal. Once it reaches this voltage, the capacitor discharges over the resistor.  It does not discharge back through the diode because the diode is a one-way current device. The voltage across the capacitor isn't directly the peak voltage of the waveform. This is because the diode consumes some voltage. Therefore the maximum voltage measured across the output is actually higher than the input voltage by a factor of the voltage drop across the diode. To get the true peak voltage, we must subtract the voltage that the diode consumes from the output signal.
-So if we measure the voltage at the capacitor to be 9V and the diode consumes 0.6V, the peak voltage of the input signal is actually 8.4V. The time it will take for the capacitor to completely discharge is 5RC, where R is the resistance and C is the capacitance. This time needs to be larger than the time of a half period of the 40 kHz signal, which is 0.0125 $ms^{-1}$. So the RC need to be larger than $5 * 0,0125 ms^{-1} = 0.0625ms^{-1}$.  With this RC the capacitor discharges slowly enough to have a signal so the comparator can detect the difference between a received and not received signal.\footnote{The final values differ from the given RC value. This is due the non ideal behaviour of physical capacitors. The final values as given in the circuit of appendix \ref{Appendixcircuits} are found by testing different configurations.}
+The capacitor charges due to this sinusoidal wave, the voltage over the capacitor basically follows the input voltage source.
+It will charge up to the peak voltage of the signal. Once it reaches this voltage, the capacitor discharges over the resistor.
+It does not discharge back through the diode because the diode is a one-way current device.
+
+The voltage across the capacitor isn't directly the peak voltage of the waveform.
+This is because the diode consumes some voltage.
+Therefore the maximum voltage measured across the output is actually higher than the input voltage by a factor of the voltage drop across the diode.
+To get the true peak voltage, we must subtract the voltage that the diode consumes from the output signal.
+So if we measure the voltage at the capacitor to be 9V and the diode consumes 0.6V, the peak voltage of the input signal is actually \SI{8.4}{\volt}.
+
+The time it will take for the capacitor to completely discharge is 5RC, where R is the resistance and C is the capacitance.
+This time needs to be larger than the time of a half period of the 40 kHz signal, which is 0.0125 $ms^{-1}$.
+So the RC need to be larger than $5 * 0,0125 ms^{-1} = 0.0625ms^{-1}$.
+With this RC the capacitor discharges slowly enough to have a signal so the comparator can detect the difference between a received and not received signal.\footnote{The final values differ from the given RC value. This is due the non ideal behaviour of physical capacitors. The final values as given in the circuit of appendix \ref{Appendixcircuits} are found by testing different configurations.}
 
 \begin{figure}[H]
 \centering
