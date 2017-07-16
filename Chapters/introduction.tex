@@ -62,18 +62,18 @@ Another possibility for using Bluetooth in distance sensing is measuring the tim
 
 \subsection*{Radio Frequency}
 
-In Journal of Field Robotics \cite{Min2016} it is shown that it is possible to determine the angle of arrival (AOA) using rotating directional antenna's, antenna arrays or beam forming antenna. This (AOA) could be used to map devices and estimate the distance between these mapped devices based on received signal power. The problem is that these systems are big, expensive and complex making them unfavourable for use on a Zebro and within the time frame of the BAP.
+It is possible to determine the angle of arrival (AOA) using rotating directional antenna's, antenna arrays or beam forming antenna \cite{Min2016}. This (AOA) could be used to map devices and estimate the distance between these mapped devices based on received signal power. The problem is that these systems are big, expensive and complex making them unfavourable for use on a Zebro and within the time frame of the BAP.
 
 \subsection*{Acoustic}
 
-The literature \cite{Peng2007} uses acoustic signals to determine time-of-arrival (TOA). Two-way sensing is used to determine the distance without the need for synchronised clocks. The result is a low cost, high accuracy device which operates in the audible sound spectrum. The range for indoor applications is roughly 5 meters due to reflection/multipath.
+Acoustic signals \cite{Peng2007} can be used to determine the time-of-arrival (TOA). Two-way sensing is used to determine the distance without the need for synchronised clocks. The result is a low cost, high accuracy device which operates in the audible sound spectrum. The range for indoor applications is roughly 5 meters due to reflection/multipath.
 
 \subsection*{Infra red}
 
 The paper about the Multirobot Positioning Systems \cite{Pugh2009} describes a system of miniature robots which use IR to determine the distance between robots. The range of this system is around 3 meters.
 
 \subsection*{Ultrasonic}
-In literatures \cite{Priyantha2000,Priyantha2005,Balakrishnan2003,Smith2005} they describe the work done on a system, called Cricket, that uses ultrasound in combination with the RF communication channel to determine distance between two devices.
+MIT has designed an indoor location-support system called Cricket \cite{Priyantha2000,Priyantha2005,Balakrishnan2003,Smith2005}, that uses ultrasound in combination with the RF communication channel to determine distance between two devices.
 The system measures the time difference of arrival (TDOA) of a RF transmitted ID tag and an ultrasonic pulse.
 This time difference is related to the distance and gives results with an accuracy of 1 cm with proper filtering techniques. This system uses beacons with a fixed position to determine the relative distance of moving devices.
 The range of the system is roughly 10 meters.
