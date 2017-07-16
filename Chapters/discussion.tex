@@ -6,16 +6,16 @@ Using the oscilloscope in this set-up the resolution of the TDOA and delay measu
 This corresponds to a distance resolution of \SI{3.4}{\centi\meter}.
 In the final prototype these measurements will be done using a timer with a oscillator frequency of \SI{40}{\kilo\hertz} resulting in a resolution of \SI{25}{\micro\second}.
 This resolution in time measurement gives a distance resolution of \SI{8}{\milli\meter}.
-
-By comparing these resolutions it's clear that, using the current results described in chapter~\ref{chap:results}, nothing can be said about the accuracy of the final fully integrated system.
-The results do show that even with the lower measurement resolution of the oscilloscope, the required measurement resolution of \SI{10}{\centi\meter} from requirement~\ref{req:locres} is reached. 
+%By comparing these resolutions it's clear that, using the current results described in chapter~\ref{chap:results}, nothing can be said about the accuracy of the final fully integrated system.
+%The results do show that even with the lower measurement resolution of the oscilloscope,
+the required measurement resolution of \SI{10}{\centi\meter} from requirement~\ref{req:locres} is reached.
 
 If we compare the resolution of \SI{8}{\milli\meter} to the error created by the uncertainty of the delay, \SI{17}{\centi\meter}, it's is clear that the final accuracy will be mainly determined by the uncertainty in the delay.
-As discussed in chapter~\ref{chap:results} this error has a maximum of \SI{17}{\centi\meter}.
+As discussed in chapter~\ref{chap:results} this error has a maximum of \SI{17}{\centi\meter} due to the Tx and Rx delay of the radio frequency pulse. Some imperfections of the antenna reflector result in an accuracy of \SI{20}{\centi\meter}.
 This error is larger than the accuracy requirement \ref{req:locper} of \SI{10}{\centi\meter}.
 This means that, without a filtering method the accuracy requirement is not met.
 
-If we are able to characterize the distribution of the uncertainty in the delay the particle filter implemented on the MCU will be able to increase the accuracy.
+If we are able to characterise the distribution of the uncertainty in the delay the particle filter implemented on the MCU will be able to increase the accuracy.
 How this particle filter works is discussed in~\cite{processing}.
 
 In conclusion the results given in chapter~\ref{chap:results} do not give enough information to determine the final accuracy of the prototype system.
