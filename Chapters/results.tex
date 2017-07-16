@@ -1,22 +1,49 @@
 \chapter{Results}
 \label{chap:results}
 
+\section{Test plan}
+\label{sec:testplan}
+Since the countermeasure against the delay in the communication channel is not yet implemented for the first prototype tests, complete distance measurements cannot be performed.
+Instead measurements are done by measuring the $US_{detect}$ signal and the communication signal using an oscilloscope.
+
+Before we can test the distance measurements we first need to measure the delay in the communication channel (RF) and the deviation of this delay.
+To measure the delay we plot the TX signal of the transmitting module and the RX signal of the receiving module on the oscilloscope.
+The TX signal shows when a module starts transmitting packages over the RF channel and the RX signal shows when the other module starts receiving the packages.
+We do this measurement over an arbitrary distance.
+From these 2 signals the delay between transmitting and receiving can be determined.
+
+Using 2 modules equipped with the naked proto PCBs we measure the performance for 3 different distances.
+First the modules are placed with a distance of \SI{1}{\meter} between them.
+For the second test this distance is increased to \SI{3}{\meter} and to \SI{5}{\meter} for the final test.
+By plotting the RX signal and the $US_{detect}$ signal of a single module on the oscilloscope the TDOA of the two signals can be determined.
+
+Using the delay measured in the first test and the TDOA of the second test a distance can be calculated.
+Focus is put on the deviation of the result when the measurement is performed multiple times.
+It's less important if the result corresponds to the actual distance since, as long as the measurement deviation is small, the system can be calibrated to give the correct distance.
+Using the deviation measured on the communication delay it is possible to determine if a deviation in the distance result is due to the communication system or the distance sensing system.
+
+For the test the microcontroller is simulated by an Arduino to generate the control and data signal necessary for the test.
+For the distance sensing system (transmitter + receiver) the naked proto PCBs are used.
+The communication system is implemented with an protoboard and the Digimesh modules as discussed in the thesis regarding the communication system \cite{communication}.
+The necessary power is supplied by multiple power supplies.
+
+\section{Measurements}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Figures/delay_tx_rx.JPG}
-\caption{Delay in TX an RX}
+\caption{Delay in TX an RX (RF communication channel)}
 \label{fig:delay_tx_rx}
 \end{figure}
-
 
 Figure~\ref{fig:delay_tx_rx} shows the TX signal of the transmitting module (Blue) and the RX signal of the receiving module (Yellow).
 The delay between transmitting a package and receiving the package at the other module is \SI{6.5}{\milli\second}.
 Due this delay there is a difference of \SI{6.5}{\milli\second} between the measured TDOA and the actual $\Delta t$ (see figure~\ref{fig:ultra1}) as discussed in section~\ref{sec:delay}.
-This means the distance calculated using the measured $\Delta t$ is:
+This means the distance error corresponding to the measured delay is:
 
 $ v_{sound} * t_{delay} = \SI{340.29}{\meter\per\second} * \SI{6.5}{\milli\second} = \SI{2.2}{\meter} $
 
-lower than the actual distance between the modules.
+Since this delay is present in every measurement there will be an error of \SI{2.2}{\meter} in every measurement.
 The distance corresponding to the delay, \SI{2.2}{\meter}, will be added the to result of the distance measuring test to show that the measurements are correct when the delay is taken into account.
 At this point this has to be done manually but in the future a method to deal with this delay will be implemented as discussed in section~\ref{sec:delay}.
 
@@ -28,13 +55,14 @@ The delay is independent of the distance between transmitter and receiver.
 \item
 The delay varies with time.
 It has an average of \SI{6.5}{\milli\second} and a deviation of \SI{0.5}{\milli\second}.
-So the delay lies anywhere between \SI{6}{\milli\second} and \SI{7}{\milli\second}.
+This means that for every measurement the actual delay in the communication channel will lie somewhere between \SI{6}{\milli\second} and \SI{7}{\milli\second}.
+For each measurement the actual value for this delay will be different and thus introduces an inaccuracy.
 \end{itemize}
 
 This means that, by using the average delay to compensate for the effect of the delay, a maximum error of $\pm$ \SI{0.5}{\milli\second} is introduced to $\Delta t$.
 This error corresponds to a distance error of:
 
-$ v_{sound} * \pm t_{error} = \SI{340.29}{\meter\per\second} * \pm \SI{.5}{\milli\second} =\pm \SI{17}{\centi\meter} $
+$ v_{sound} * \pm t_{error} = \SI{340.29}{\meter\per\second} * \pm \SI{.5}{\milli\second} =\pm \SI{20}{\centi\meter} $
 
 
 \begin{figure}[H]
@@ -79,7 +107,7 @@ $ \Delta t = TDOA + t_{delay}  = \SI{2.8}{\milli\second} + \SI{6.5}{\milli\secon
 
 Which corresponds to a distance of:
 
-$ v_{sound} * t_{delay} = \SI{340.29}{\meter\per\seconhttps://www.youtube.com/watch?v=7Q-HWedUolod} * \SI{9.3}{\milli\second} = \SI{3.2}{\meter} $
+$ v_{sound} * t_{delay} = \SI{340.29}{\meter\per\second} * \SI{9.3}{\milli\second} = \SI{3.2}{\meter} (\Delta = \SI{20}{\centi\meter} $ compared to the actual distance of $\SI{3}{\meter})$
 
 \begin{figure}[H]
 \centering
@@ -98,7 +126,7 @@ $ \Delta t = TDOA + t_{delay}  = \SI{8.8}{\milli\second} + \SI{6.5}{\milli\secon
 
 Which corresponds to a distance of:
 
-$ v_{sound} * t_{delay} = \SI{340.29}{\meter\per\second} * \SI{15.3}{\milli\second} = \SI{5.2}{\meter} $
+$ v_{sound} * t_{delay} = \SI{340.29}{\meter\per\second} * \SI{15.3}{\milli\second} = \SI{5.2}{\meter} (\Delta = \SI{20}{\centi\meter} $ compared to the actual distance of $\SI{5}{\meter})$
 
 \section{Results after integration}
 
