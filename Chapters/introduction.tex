@@ -5,34 +5,34 @@ Its mission is:
 \\\\
 \emph{To develop self-deploying, inexpensive, extremely miniaturized and autonomous roving robots which cooperate in swarms capable of functioning in a wide spectrum of topologies and environments that can quickly provide information with the help of distributed sensor systems and supports payloads suitable for a wide range of missions.}
 \\\\
-It started in September 2013, and has now been absorbed by the TU Delft Robotics Institute as part of their research endeavours into swarm robotics.
+Zebro started in September 2013, and has now been absorbed by the TU Delft Robotics Institute as part of their research endeavours into swarm robotics.
 
 The idea of swarm robotics is inspired by nature, in particular by small insects or birds who exhibit so-called swarm behaviour.
-As a group, a swarm can accomplish complex tasks, despite the fact they are not considered `smart' individually.
+As a group, the swarm can accomplish complex tasks, despite the fact they are not considered `smart' individually.
 By all following the same simple set of rules, the swarm as a whole can exhibit emergent behaviour, behaviour that is not explicitly programmed into any one of its members.
 For example, flocking is not the behaviour of a single bird but the emergent behaviour of the entire flock.
 
 This idea that a group of simple individuals can deal with more complex tasks is the cornerstone of swarm robotics.
 Furthermore, an entire swarm is very resilient, as every individual member is expendable.
-This means that swarm robotics has some unique applications, such as a disaster area that is inaccessible to humans or large robots, due to a hazardous or arduous environment.
+This means that swarm robotics has some unique applications, such as in a disaster area that is inaccessible to humans or large robots, due to a hazardous or arduous environment.
 
 Currently, the ZEBRO project is working to redesign the robots to (further) improve producibility, reparability, stability, and lower unit cost.
 Being able to produce useful ZEBRO units on a large scale will provide fertile ground for swarm robotics research efforts.
 There are several different versions of the ZEBRO, each with a different form factor and design goal.
 Our research focuses on the Deci ZEBRO, which is the size of an A4 sheet of paper and is designed to be extremely modular.
 
-Our group's goal is the design of a communication and localization module for the Deci Zebro.
+Our group's goal is the design of a communication and localisation module for the Deci Zebro.
 The module has two purposes.
 The first is to provide a Zebro robot with the positions of robots in its vicinity.
 The second is to facilitate wireless communication within the Zebro swarm.
 
-We have decided on using range measurements for localization.
+Localisation is done by using range measurements.
 This has lead to the following subdivision of our module:
 \begin{itemize}
   \item
     The \textbf{distance sensing} system measures the distance between Zebro robots.
   \item
-    The \textbf{communication} system sets up a decentralized mesh network for communication.
+    The \textbf{communication} system sets up a decentralised mesh network for communication.
   \item
     The \textbf{processing} system takes the measurements provided by the other submodules and uses them to construct a local (i.e.\ in the Zebro's neighbourhood) model of the swarm.
 \end{itemize}
@@ -56,9 +56,9 @@ The results are given in the following subsections:
 
 \subsection*{Bluetooth}
 
-Bluetooth devices have two usable standard parameters: Received signal strength indicator (RSSI) and link quality. Both could be used to determine the distance between devices since, in theory, both parameters linearly depend on the distance between devices. Literature shows that using know formulas, the distance between devices can be estimated form the RSSI. Literature \cite{Forno2005} shows two problems with using RSSI as a distance sensing technique: the RSSI is not stable since the Bluetooth protocol takes measures to ensure the highest quality link and the RSSI is dependent on device orientation. Papers \cite{Scheerens2012,Dahlgren2014} gives values for the orientation dependency: in worst case the result for a measurement done at 1 meter distance gives a RSSI values which corresponds to 10 meter. Using RSSI for distance sensing might be possible in static environments with fixed device orientation but is not adequate in a system with moving devices.
+Bluetooth devices have two usable standard parameters: Received signal strength indicator (RSSI) and link quality. Both could be used to determine the distance between devices since, in theory, both parameters linearly depend on the distance between devices. Literature shows that using know formulas, the distance between devices can be estimated from the RSSI. Literature \cite{Forno2005} shows two problems with using RSSI as a distance sensing technique: the RSSI is not stable since the Bluetooth protocol takes measures to ensure the highest quality link and the RSSI is dependent on device orientation. Papers \cite{Scheerens2012,Dahlgren2014} gives values for the orientation dependency: in worst case the result for a measurement done at 1 meter distance gives a RSSI values which corresponds to 10 meter. Using RSSI for distance sensing might be possible in static environments with fixed device orientation but is not adequate in a system with moving devices.
 
-Another possibility for using Bluetooth in distance sensing is measuring the time-of-flight of transmitted messages. We can either measure the time difference between sending a message and when it arrives at the other device or we can measure the round trip time when a message is transmitted back and forth between two devices. For the first method both devices would need high accuracy synchronised clocks \cite{Ekberg2009} and the second methods is highly dependent on both the message processing time and the accuracy of the internal clock. Furthermore the technique is difficult the implement in a system where messages are hopped between robots making it hard to determine which path the message has travelled.
+Another possibility for using Bluetooth in distance sensing is measuring the time-of-flight of transmitted messages. We can either measure the time difference between sending a message and when it arrives at the other device or we can measure the round trip time when a message is transmitted back and forth between two devices. For the first method both devices would need high accuracy synchronised clocks \cite{Ekberg2009} and the second methods is highly dependent on both the message processing time and the accuracy of the internal clock. Furthermore the technique is difficult to implement in a system where messages are hopped between robots making it hard to determine which path the message has travelled.
 
 \subsection*{Radio Frequency}
 
@@ -92,7 +92,7 @@ This voltage level can than be detect by, for example, an comparator.
 
 At this point in the literature study we see the most potential in a system using ultrasound and the communication channel. Both the accuracy and the range are high. Other researched systems fall short on one of these fronts: Bluetooth systems have a high range but the accuracy for moving devices is poor, acoustic and IR systems have a high accuracy but the range is insufficient for the Zebro swarm.
 
-The biggest challenge of a ultrasonic system is the directional nature of ultrasonic transmitters and receivers. In the Zebro swarm we need a distance sensing system with a 360 degree field. Using ultrasonic reflector antenna \cite{Claycomb1992} we hope to create a omnidirectional ultrasonic transducer which allows us to create a mobile version of the cricket system \cite{Priyantha2000,Priyantha2005,Balakrishnan2003,Smith2005} usable for the Zebro swarm.
+The biggest challenge of a ultrasonic system is the directional nature of ultrasonic transmitters and receivers. In the Zebro swarm we need a distance sensing system with a 360 degree field. Using the ultrasonic reflector antenna \cite{Claycomb1992} a omnidirectional ultrasonic transducer is created, which allows us to create a mobile version of the cricket system \cite{Priyantha2000,Priyantha2005,Balakrishnan2003,Smith2005} usable for the Zebro swarm.
 
 
 \section{Thesis synopsis}

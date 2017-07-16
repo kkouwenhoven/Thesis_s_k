@@ -9,7 +9,7 @@ At the end of this chapter there should be enough confidence in the working of t
 \section{Antenna}
 \label{sec:antenna_proof}
 
-The antenna is elevated above the ultrasonic transducer. It is important to centre the antenna lens and the transducer to make sure their axis align. For this purpose the transducer is centred on a circular mounting plate. The antenna is placed above the transducer by connecting it to two risers which are placed at fixed points in the mounting plate. The result is the antenna concept shown in figure~\ref{fig:proto_ant}. The two risers could give the antenna a blind spot, later on we test if the risers have influence on the transmitting and receiving characteristics.
+The antenna is elevated above the ultrasonic transducer. It is important to centre the antenna lens and the transducer to make sure their axis align. For this purpose the transducer is centred on a circular mounting plate. The antenna is placed above the transducer by connecting it to two risers which are placed at fixed points in the mounting plate. The result is the antenna concept shown in Figure~\ref{fig:proto_ant}. The two risers could give the antenna a blind spot, later on we test if the risers have influence on the transmitting and receiving characteristics.
   Note that in this design the mechanical connection to the Zebro is not yet implemented. The final design with mechanical interface will be presented in the chapter describing the prototype, section \ref{sec:antennamech}.
 
 \begin{figure}[H]
@@ -18,7 +18,7 @@ The antenna is elevated above the ultrasonic transducer. It is important to cent
 \caption{Proof of concept version of the ultrasonic antenna}\label{fig:proto_ant}
 \end{figure}
 
-Using that the beam pattern of the transducer is \SI{50}{\degree} we can find the distance between transducer and antenna for which the entire beam is incident on the antenna lens. Using the Zebro team 3D printer we made 2 copies of the antenna design, see figure~\ref{fig:3D_ant}, to use for the proof of concept tests.
+Using that the beam pattern of the transducer is \SI{50}{\degree} we can find the distance between transducer and antenna for which the entire beam is incident on the antenna lens. Using the Zebro team 3D printer we made 2 copies of the antenna design, see Figure~\ref{fig:3D_ant}, to use for the proof of concept tests.
 
 \begin{figure}[H]
 \centering
@@ -31,8 +31,8 @@ The transmitter and receiver circuits can be connected to the bottom side of the
 
 \section{Protoboard}
 
-The circuit of figure~\ref{fig:receivecircuit} is made on a protoboard as can be seen in figure \ref{fig:protoboard}. The components used on the protoboard are the components that were available in the Telligenhall. For the operation amplifiers we used the LM741 \cite{LM741}
-, for the comparators we used a LM339 and  a LM311. The rest of the components are normal resistors and capacitors. For the signals and power sources are cables soldered to the circuit. From left to right on the lower line in the circuit board, are the first and second stage amplifiers visible. Next to the amplifiers is the first stage comparator visible and on top the second stage comparator. On the board is also a potentiometer visible, because of this we can tune the amplification of the operation amplifier.
+The circuit of Figure~\ref{fig:receivecircuit} is made on a protoboard as can be seen in Figure \ref{fig:protoboard}. The components used on the protoboard are the components that were available in the Tellegenhall. For the operation amplifiers we used the LM741 \cite{LM741}
+, for the comparators we used a LM339 and  a LM311. The rest of the components are normal resistors and capacitors. For the signals and power sources are cables soldered to the circuit. From left to right on the lower line in the circuit board, are the first and second stage amplifiers visible. Next to the amplifiers is the first stage comparator visible and on top the second stage comparator. On the board is also a potentiometer visible, because of this we can tune the amplification of the operational amplifier.
 
 
 \begin{figure}[H]
@@ -52,14 +52,14 @@ In this test stage we check for production errors such as short circuits and che
 
 For the proof of concept tests the communication subsystem is not yet implemented.
 This means that we cannot test the full concept as described in chapter~\ref{chap:concept} since we lack the required RF message.
-We can however test the generation and accuracy of the $US_{detect}$ signal as seen in figure~\ref{fig:ultra3}.
+We can however test the generation and accuracy of the $US_{detect}$ signal as seen in Figure~\ref{fig:ultra3}.
 The $US_{detect}$ signal must have a clear distinction between a high (no pulse received) and low state (pulse received).
 This change from high to low happens when the transducer receives a ultrasonic signal.
 
-To test the circuit we connect it to a transducer placed in the reflecting antenna (figure~\ref{fig:3D_ant}).
+To test the circuit we connect it to a transducer placed in the reflecting antenna (Figure~\ref{fig:3D_ant}).
 The output of the receiver circuit is the $US_{detect}$ signal.
 To simulate the transceiver we power the MIC4428 \cite{MIC4428}
-H-bridge driver IC with a power supply and use the signal generator to simulate the \SI{40}{\kilo\hertz} PWM wave output of the micro controller (see figure~\ref{fig:ultra3}).
+H-bridge driver IC with a power supply and use the signal generator to simulate the \SI{40}{\kilo\hertz} PWM wave output of the micro controller (see Figure~\ref{fig:ultra3}).
 The output of the bridge driver IC is connected to a second ultrasonic transducer.
 
 To see the effect the surroundings have on the distance measurements and thus on the $US_{detect}$ signal we perform the test in different set-ups:
@@ -100,7 +100,7 @@ Modifications need to be made to remove or filter this noise signal and get a hi
 \end{figure}
 
 When the circuit is receiving we see that the waveform at the output of the peak detection circuit has a higher peak to peak voltage and a lower mean than expected.
-Due this high peak to peak voltage the signal at the input of the comparator goes below the threshold voltage each capacitor charge-discharge cycle (see figure~\ref{fig:waves_peak_test}).
+Due this high peak to peak voltage the signal at the input of the comparator goes below the threshold voltage each capacitor charge-discharge cycle (see Figure~\ref{fig:waves_peak_test}).
 Thus the signal at the output, $US_{detect}$, is constantly switching between the high (not receiving) and low (receiving) state.
 This can be solved by making some modification to the component values in the peak detection circuit.
 The modifications made to the amplifiers and the peak detection circuit will be discussed in the next section.
@@ -108,10 +108,9 @@ The modifications made to the amplifiers and the peak detection circuit will be 
 
 \subsection{Modifications}
 \label{chap:mod}
-As discussed in the previous section the first prototype did not have the desired results. The first operational amplifiers produces a small oscillating signal which is amplified by the second stage op-amp. This oscillating signal could come from the resistor capacitor combination before the first op-amp or by the low bandwidth, gain bandwidth product of the LM741's. The voltage gain falls rapidly with increasing the signal frequency. At 40 kHz the gain of the LM741 is only 25 times. The LM741's are made for sound amplification that has a maximum at 22 kHz The replacement operational amplifier, the LF353 \cite{LF353}
-, has a higher bandwidth which results in a higher possible voltage gain. With this modification the noise oscillation, as discussed in the previous section, is not noticeable any more. So this modification fixed the low gain and distortion signal for the peak detection circuit.
+As discussed in the previous section the first prototype did not have the desired results. The first operational amplifiers produces a small oscillating signal which is amplified by the second stage op-amp. This oscillating signal could come from the resistor capacitor combination before the first op-amp or by the low bandwidth, gain bandwidth product of the LM741's. The voltage gain falls rapidly with increasing the signal frequency. At 40 kHz the gain of the LM741 is only 25 times. The LM741's are made for sound amplification that has a maximum at 22 kHz The replacement operational amplifier, the LF353 \cite{LF353}, has a higher bandwidth which results in a higher possible voltage gain. With this modification the noise oscillation, as discussed in the previous section, is not noticeable any more. So this modification fixed the low gain and distortion signal for the peak detection circuit.
 
-The problem with the peak detection circuit came from the fact that the capacitor discharges to fast. This is solved to change the discharge resistor to a higher value, this way the capacitor discharges slower and the output signal of the peak detection circuit doesn't fall underneath the $V_{th}$ anymore.
+The problem with the peak detection circuit came from the fact that the capacitor discharges to fast. This is solved to change the discharge resistor to a higher value\footnote{The final values of the resistor is given in the circuit of appendix \ref{Appendixcircuits}.}, this way the capacitor discharges slower and the output signal of the peak detection circuit doesn't fall underneath the $V_{th}$ anymore.
 
 
 \subsection{Results after modifications}
@@ -135,13 +134,13 @@ We estimate the effect of this instability to be negligible since:
 \item
 Only the first falling edge is important, this is the most direct path the ultrasonic signal travels. The distortions mostly result out of reflections and signal cancellations, but these signals are never the direct path of the signal. This is why these instabilities can be neglected.
 \item
-Since we want to have an accuracy of 10cm over the distance of 1 meter. We need to poll at a certain frequency. The speed op sound is 343 $ms^{-1}$, the time it takes for sound to travel 10 cm is 0.29ms. This is why we will use a clock of \SI{40}{\kilo\hertz} for the polling, this frequency does have period of 0.025ms and thus can reach an accuracy of $343 * 0.025 = 8.6 mm$ in ideal conditions.
+Since we want to have an accuracy of 10cm over the distance of 1 meter. We need to poll at a certain frequency. The speed of sound is \SI{343}{\meter}$s^{-1}$, the time it takes for sound to travel 10 cm is 0.29ms. This is why we will use a clock of \SI{40}{\kilo\hertz} for the polling, this frequency does have period of 0.025ms and thus can reach an accuracy of $343 * 0.025 = 8.6 mm$ in ideal conditions.
 The received noise is in the order of mili seconds. This means that we might do a miscount due to the noise but the error will be in the order of \SI{25}{\micro\second}.
 To miss an entire measurement the noise would have to perfectly align with the counter cycle such that the signal is high every time the counter checks the $US_{detect}$ signal.
 We assume the chances for this to happen are low but at this point in time we cannot yet measure the influence of the noise since the communication subsystem and micro controller are not yet integrated.
 As soon as we have a working system prototype, with all subsystems integrated, we can test how often a measurement fails due to the noise.
 \item
-Since the speed of the Zebro is low , \SI{5}{\meter\per\second}, and the frequency of measurements is high a neighbouring Zebro will not have moved out of communication range when one measurement is failed.
+Since the speed of the Zebro is low, \SI{5}{\meter\per\second}, and the frequency of measurements is high a neighbouring Zebro will not have moved out of communication range when one measurement is failed.
 It is not necessary to know the accurate location of each neighbour as long as the Zebro know that he is within communication range of others.
 \item
 The processing method, a particle filter, has capabilities to detect missed measurements and to act accordingly. \cite{processing}
@@ -153,7 +152,7 @@ The processing method, a particle filter, has capabilities to detect missed meas
 \caption{Peak detect signal together with the $V_{th}$ of the first comparator when receiving}\label{fig:peakvth}
 \end{figure}
 
-The peak detection circuit was also being modified and gives a much better result now. As can be seen in figure \ref{fig:peakvth}, the peak detect signal (Yellow) stays high when receiving a pulse the capacitor discharges slowly enough to keep the signal above the $V_{th}$ (Blue) of the first comparator. The zero reference is turned 1 division down to get a better plot. So the $V_{th}$ is around 5.2V.
+The peak detection circuit was also being modified and gives a much better result now. As can be seen in Figure \ref{fig:peakvth}, the peak detect signal (Yellow) stays high when receiving a pulse the capacitor discharges slowly enough to keep the signal above the $V_{th}$ (Blue) of the first comparator. The zero reference is turned 1 division down to get a better plot. So the $V_{th}$ is around 5.2V.
 
 As discussed in section \ref{sec:antenna_proof} the risers of the antenna could give the antenna a blind spot, however with testing we didn't recognise any influence on the transmitter and receiver side due to these risers.
 
