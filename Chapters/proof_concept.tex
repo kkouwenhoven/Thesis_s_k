@@ -99,7 +99,7 @@ Modifications need to be made to remove or filter this noise signal and get a hi
 \label{fig:waves_peak_test}
 \end{figure}
 
-When the circuit is receiving we see that the waveform at the output of the peak detection circuit has a higher peak to peak voltage and a lower mean than expected.
+When the circuit is receiving, the waveform at the output of the peak detection circuit has a higher peak to peak voltage and a lower mean than expected.
 Due this high peak to peak voltage the signal at the input of the comparator goes below the threshold voltage each capacitor charge-discharge cycle (see Figure~\ref{fig:waves_peak_test}).
 Thus the signal at the output, $US_{detect}$, is constantly switching between the high (not receiving) and low (receiving) state.
 This can be solved by making some modification to the component values in the peak detection circuit.
