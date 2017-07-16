@@ -99,7 +99,7 @@ Modifications need to be made to remove or filter this noise signal and get a hi
 \label{fig:waves_peak_test}
 \end{figure}
 
-When the circuit is receiving we see that the waveform at the output of the peak detection circuit has a higher peak to peak voltage and a lower mean than expected.
+When the circuit is receiving, the waveform at the output of the peak detection circuit has a higher peak to peak voltage and a lower mean than expected.
 Due this high peak to peak voltage the signal at the input of the comparator goes below the threshold voltage each capacitor charge-discharge cycle (see Figure~\ref{fig:waves_peak_test}).
 Thus the signal at the output, $US_{detect}$, is constantly switching between the high (not receiving) and low (receiving) state.
 This can be solved by making some modification to the component values in the peak detection circuit.
@@ -108,7 +108,7 @@ The modifications made to the amplifiers and the peak detection circuit will be 
 
 \subsection{Modifications}
 \label{chap:mod}
-As discussed in the previous section the first prototype did not have the desired results. The first operational amplifiers produces a small oscillating signal which is amplified by the second stage op-amp. This oscillating signal could come from the resistor capacitor combination before the first op-amp or by the low bandwidth, gain bandwidth product of the LM741's. The voltage gain falls rapidly with increasing the signal frequency. At 40 kHz the gain of the LM741 is only 25 times. The LM741's are made for sound amplification that has a maximum at 22 kHz The replacement operational amplifier, the LF353 \cite{LF353}, has a higher bandwidth which results in a higher possible voltage gain. With this modification the noise oscillation, as discussed in the previous section, is not noticeable any more. So this modification fixed the low gain and distortion signal for the peak detection circuit.
+As discussed in the previous section the first prototype did not have the desired results. The first operational amplifiers produces a small oscillating signal which is amplified by the second stage op-amp. This oscillating signal could come from the resistor capacitor combination before the first op-amp or by the low bandwidth, gain bandwidth product of the LM741's. The voltage gain falls rapidly with increasing the signal frequency. At 40 kHz the gain of the LM741 is only 25 times. The LM741's are made for sound amplification that is having a maximum at 22 kHz The replacement operational amplifier, the LF353 \cite{LF353}, has a higher bandwidth which results in a higher possible voltage gain. With this modification the noise oscillation, as discussed in the previous section, is not noticeable any more. So this modification fixed the low gain and distortion signal for the peak detection circuit.
 
 The problem with the peak detection circuit came from the fact that the capacitor discharges to fast. This is solved to change the discharge resistor to a higher value\footnote{The final values of the resistor is given in the circuit of appendix \ref{Appendixcircuits}.}, this way the capacitor discharges slower and the output signal of the peak detection circuit doesn't fall underneath the $V_{th}$ anymore.
 
