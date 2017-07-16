@@ -1,7 +1,7 @@
 \chapter{Proof of concept}
 
-This chapter describes the design, manufacturing and testing of the proof of concept hardware.
-Focus is put on verifying, where possible, the simulation results from chapter \ref{chap:concept}.
+This Chapter describes the design, manufacturing and testing of the proof of concept hardware.
+Focus is put on verifying, where possible, the simulation results from Chapter \ref{chap:concept}.
 During the test phase there might be multiple iterations to solve problems found during the tests.
 These modification will be described and tested.
 At the end of this chapter there should be enough confidence in the working of the system to start with a prototype design.
@@ -31,8 +31,7 @@ The transmitter and receiver circuits can be connected to the bottom side of the
 
 \section{Protoboard}
 
-The circuit of Figure~\ref{fig:receivecircuit} is made on a protoboard as can be seen in Figure \ref{fig:protoboard}. The components used on the protoboard are the components that were available in the Tellegenhall. For the operation amplifiers we used the LM741 \cite{LM741}
-, for the comparators we used a LM339 and  a LM311. The rest of the components are normal resistors and capacitors. For the signals and power sources are cables soldered to the circuit. From left to right on the lower line in the circuit board, are the first and second stage amplifiers visible. Next to the amplifiers is the first stage comparator visible and on top the second stage comparator. On the board is also a potentiometer visible, because of this we can tune the amplification of the operational amplifier.
+The circuit in Figure~\ref{fig:receivecircuit} is made on a protoboard as can be seen in Figure \ref{fig:protoboard}. The components used on the protoboard are components that were available in the Tellegenhall. For the operation amplifiers we used the LM741 \cite{LM741}, for the comparators we used a LM339 and a LM311. The rest of the components are normal resistors and capacitors. For the signals and power sources are cables soldered to the circuit. From left to right on the lower line in the circuit board, are the first and second stage amplifiers visible. Next to the amplifiers is the first stage comparator visible and on top the second stage comparator. On the board is also a potentiometer visible, because of this we can tune the amplification of the operational amplifier.
 
 
 \begin{figure}[H]
@@ -43,7 +42,7 @@ The circuit of Figure~\ref{fig:receivecircuit} is made on a protoboard as can be
 \end{figure}
 
 The protoboard of the transmitter circuit is simple, because it is a single MIC4428 \cite{MIC4428}
- IC, only the ultrasonic transceiver is connected to it and the power and signal wires.
+ IC, only the ultrasonic transceiver the power and signal wires are connected to it.
 
 \section{Test plan}
 The first test is to measure the internal signals of the circuit.
@@ -157,6 +156,6 @@ The peak detection circuit was also being modified and gives a much better resul
 As discussed in section \ref{sec:antenna_proof} the risers of the antenna could give the antenna a blind spot, however with testing we didn't recognise any influence on the transmitter and receiver side due to these risers.
 
 \section{Conclusion}
-From the test we have done we can conclude that the transmitter and receiver concept prototypes work after the needed modifications. The task now is to combine the both circuits to a working prototype.
+From the tests we have done we can conclude that the transmitter and receiver concept prototypes work after the needed modifications. The task now is to combine the both circuits to a working prototype.
 The antenna works properly as well as we can see from the results. With simple test the range of the transmitter and receiver can reach easily 5 meters.
 The only remark that can be made is that the both comparators don't have hysteresis implemented yet. This is done because the $V_{th}$ of the first comparator is close to the voltage of the not receiving signal. This results in the situation that the hysteresis region becomes small. This is why in this stage of the project is chosen to leave the hysteresis in the comparators away.
